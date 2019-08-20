@@ -19,6 +19,7 @@ def get_filters():
     city, month, day, hour = '', '', '', ''
     valid_months = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
     valid_days = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    valid_hours = range(0, 24)
 
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
@@ -48,7 +49,7 @@ def get_filters():
             break
         else:
             print("Invalid choice, please try again.")
-    while hour not in range(0, 24):
+    while hour not in valid_hours:
         hour = input("Which start hour would you like to analyze? Valid choices range from [0 to 23] or All.\n")
         try:
             hour = int(hour)
@@ -58,7 +59,7 @@ def get_filters():
                 break
             print("Invalid choice, please try again.")
             continue
-        if hour in range(0, 24):
+        if hour in valid_hours:
             break
         else:
             print("Invalid choice, please try again.")
