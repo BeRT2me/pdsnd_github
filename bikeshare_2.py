@@ -77,7 +77,7 @@ def load_data(city, month, day, hour):
     Returns:
         df - pandas DataFrame containing city data filtered by month and day
     """
-    # load data file into a dataframe
+    # load data file into a DataFrame
     df = pd.read_csv(CITY_DATA[city])
     # drop random first column
     df.drop(df.columns[[0]], inplace=True, axis=1)
@@ -94,12 +94,12 @@ def load_data(city, month, day, hour):
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
 
-        # filter by month to create the new dataframe
+        # filter by month to create the new DataFrame
         df = df[df['month'] == month]
 
     # filter by day of week if applicable
     if day != 'all':
-        # filter by day of week to create the new dataframe
+        # filter by day of week to create the new DataFrame
         days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         day = days.index(day)
         df = df[df['day_of_week'] == day]
@@ -209,7 +209,7 @@ def user_stats(df, city):
 
 
 def display_panda(df):
-    """Displays 5 rows of the filtered data frame and prompts to allow additional rows to be viewed."""
+    """Displays 5 rows of the filtered DataFrame and prompts to allow additional rows to be viewed."""
     i = 0
     display = ''
     while True:
