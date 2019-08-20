@@ -3,8 +3,7 @@ August 8th, 2019
 ### Project Title
 Bikeshare_2
 ### Description
-Describe what your project is about and what it does
-
+Filters various city's bikeshare data and displays summary statistics based on user input.
 ### Files used
 Include the files used
 
