@@ -158,9 +158,9 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    def format_travel_time(time):
+    def format_travel_time(t):
         """Formats the travel time to days, hours minutes and seconds"""
-        return time.days, time.seconds // 3600, time.seconds % 3600 // 60, time.seconds % 3600 % 60
+        return t.days, t.seconds // 3600, t.seconds % 3600 // 60, t.seconds % 3600 % 60
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
