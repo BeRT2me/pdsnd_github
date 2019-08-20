@@ -158,6 +158,10 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
+    def format_travel_time(time):
+        """Formats the travel time to days, hours minutes and seconds"""
+        return time.days, time.seconds // 3600, time.seconds % 3600 // 60, time.seconds % 3600 % 60
+
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -165,18 +169,10 @@ def trip_duration_stats(df):
     df["End Time"] = pd.to_datetime(df["End Time"])
     df['travel time'] = df["End Time"] - df["Start Time"]
     total_time = df['travel time'].sum()
-    print("The total travel time was: {} days, {} hours, {} minutes and {} seconds.".format(
-        total_time.days,
-        total_time.seconds // 3600,
-        total_time.seconds % 3600 // 60,
-        total_time.seconds % 3600 % 60))
+    print("The total travel time was: %d days, %d hours, %d minutes and %d seconds." % format_travel_time(total_time))
     # display mean travel time
     avg_time = df['travel time'].mean()
-    print("The mean travel time was: {} days, {} hours, {} minutes and {} seconds.".format(
-        avg_time.days,
-        avg_time.seconds // 3600,
-        avg_time.seconds % 3600 // 60,
-        avg_time.seconds % 3600 % 60))
+    print("The mean travel time was: %d days, %d hours, %d minutes and %d seconds." % format_travel_time(avg_time))
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
@@ -221,7 +217,7 @@ def display_panda(df):
             print('-' * 40)
             return
         else:
-            print(df[i:i+5])
+            print(df[i:i + 5])
             i += 5
 
 
