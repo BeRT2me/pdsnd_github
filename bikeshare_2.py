@@ -19,6 +19,7 @@ def get_filters():
     city, month, day, hour = '', '', '', ''
     valid_months = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
     valid_days = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    valid_hours = range(0, 24)
 
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
@@ -48,7 +49,7 @@ def get_filters():
             break
         else:
             print("Invalid choice, please try again.")
-    while hour not in range(0, 24):
+    while hour not in valid_hours:
         hour = input("Which start hour would you like to analyze? Valid choices range from [0 to 23] or All.\n")
         try:
             hour = int(hour)
@@ -58,7 +59,7 @@ def get_filters():
                 break
             print("Invalid choice, please try again.")
             continue
-        if hour in range(0, 24):
+        if hour in valid_hours:
             break
         else:
             print("Invalid choice, please try again.")
@@ -157,6 +158,10 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
+    def format_travel_time(t):
+        """Formats the travel time to days, hours minutes and seconds"""
+        return t.days, t.seconds // 3600, t.seconds % 3600 // 60, t.seconds % 3600 % 60
+
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -164,18 +169,10 @@ def trip_duration_stats(df):
     df["End Time"] = pd.to_datetime(df["End Time"])
     df['travel time'] = df["End Time"] - df["Start Time"]
     total_time = df['travel time'].sum()
-    print("The total travel time was: {} days, {} hours, {} minutes and {} seconds.".format(
-        total_time.days,
-        total_time.seconds // 3600,
-        total_time.seconds % 3600 // 60,
-        total_time.seconds % 3600 % 60))
+    print("The total travel time was: %d days, %d hours, %d minutes and %d seconds." % format_travel_time(total_time))
     # display mean travel time
     avg_time = df['travel time'].mean()
-    print("The mean travel time was: {} days, {} hours, {} minutes and {} seconds.".format(
-        avg_time.days,
-        avg_time.seconds // 3600,
-        avg_time.seconds % 3600 // 60,
-        avg_time.seconds % 3600 % 60))
+    print("The mean travel time was: %d days, %d hours, %d minutes and %d seconds." % format_travel_time(avg_time))
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
@@ -220,7 +217,7 @@ def display_panda(df):
             print('-' * 40)
             return
         else:
-            print(df[i:i+5])
+            print(df[i:i + 5])
             i += 5
 
 
