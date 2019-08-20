@@ -3,7 +3,7 @@ August 8th, 2019
 ### Project Title
 Bikeshare_2
 ### Description
-Filters various city's bikeshare data and displays summary statistics based on user input.
+Filters various city's bikeshare data by converting csv data to pandas DataFrame, and then displays summary statistics based on user input.
 ### Files used
 chicago.csv
 
